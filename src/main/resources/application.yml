@@ -2,9 +2,9 @@ logging:
   config: classpath:log4j2.yaml
 spring:
   datasource:
-    username: Shino_SC
-    password: zxcvbnm123
-    url: jdbc:mysql://110.40.251.64:3306/onlineanswer
+    username: 
+    password: 
+    url: 
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
