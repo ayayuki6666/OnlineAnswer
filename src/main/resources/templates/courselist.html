@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>选课列表</title>
+  <link href="/static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet">
+  <link href="/static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+  <script src="/static/js/jquery-3.6.1.min.js" th:src="@{/js/jquery-3.6.1.min.js}"></script>
+  <script src="/static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+  <script src="/static/js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
+</head>
+<body>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>课程编号</th>
+    <th>课程名</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="course,stat:${takecourselist}">
+    <td th:text="${course.courseID}">111</td>
+    <td th:text="${course.courseName}">222</td>
+    <td><a th:href="@{/asklist/{courseID}(courseID=${course.courseID})}"><button class="btn btn-primary">进入</button></a></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

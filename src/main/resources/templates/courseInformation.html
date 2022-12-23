@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程管理</title>
+    <link href="/static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+    <script src="/static/js/jquery-3.6.1.min.js" th:src="@{/js/jquery-3.6.1.min.js}"></script>
+    <script src="/static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+    <script src="/static/js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>课程编号</th>
+        <th>课程名</th>
+        <th>课程内容描述</th>
+        <th>授课教师</th>
+        <th>职称</th>
+        <th>教师简介</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course,stat:${teachCourseInfoList}">
+            <form method="post"action="">
+                <td th:text="${course.courseID}">test
+                </td>
+                <td th:text="${course.courseName}">11
+                </td>
+                <td th:text="${course.courseComment}">11
+                </td>
+                <td th:text="${course.TeacherName}">11
+                </td>
+                <td th:text="${course.teacherTitle}">11
+                </td>
+                <td th:text="${course.teacherComment}">11
+                </td>
+                <td>
+                    <a th:href="@{/asklist/{courseID}(courseID=${course.courseID})}"><button class="btn btn-primary btn-sm" type="button">进入</button></a>
+                    <div th:if="${session.user.permission} eq 'admin'">
+                    <button type="submit" class="btn btn-primary btn-sm btn-danger">删除</button>
+                    </div>
+                </td>
+                <input name="_method" type="hidden" value="DELETE">
+                <input name="courseID" type="hidden" th:value="${course.courseID}">
+            </form>
+    </tr>
+    </tbody>
+</table>
+<button th:if="${session.user.permission=='admin'}" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#alterCourse">
+    修改/添加课程
+</button>
+<a th:href="@{/assign}">
+<button th:if="${session.user.permission=='admin'}" type="button" class="btn btn-primary btn-lg">
+    分配课程
+</button>
+</a>
+<a th:href="@{/teacher}">
+<button th:if="${session.user.permission=='admin'}" type="button" class="btn btn-primary btn-lg">
+    管理教师
+</button>
+</a>
+
+
+<div class="modal fade" id="alterCourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post" action="">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="alterCourseLabel">修改课程</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="courseID">课程名</label>
+                    <input class="form-control" id="courseID" name="courseID" placeholder="输入课程号(添加时留空或输入正确课程号)">
+                </div>
+                <div class="form-group">
+                    <label for="courseName">课程名</label>
+                    <input class="form-control" id="courseName" name="courseName" placeholder="输入课程名" required>
+                </div>
+                <div class="form-group">
+                    <label for="courseComm">课程描述</label>
+                    <input class="form-control" id="courseComm" name="courseComment" placeholder="输入课程描述" >
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

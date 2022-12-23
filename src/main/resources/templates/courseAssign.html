@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>教师分配</title>
+  <link href="/static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet">
+  <link href="/static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+  <script src="/static/js/jquery-3.6.1.min.js" th:src="@{/js/jquery-3.6.1.min.js}"></script>
+  <script src="/static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+  <script src="/static/js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
+</head>
+<body>
+<form method="post" action="">
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>课程编号</th>
+    <th>课程名</th>
+    <th>授课教师</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="course,stat:${courseInfoList}" >
+    <td th:text="${course.courseID}"></td>
+    <input name="courseID" type="hidden" th:value="${course.courseID}">
+    <td th:text="${course.courseName}"></td>
+    <td>
+      <select class="combobox form-control" name="teacherID" id="name">
+      <option value="" selected="selected">Select a Name</option>
+      <option th:each="teacher,stat:${teacherList}" th:value="${teacher.teacherID}" th:text="${teacher.TeacherName}"></option>
+      </select>
+    </td>
+  </tr>
+  </tbody>
+</table>
+  <input name="_method" type="hidden" value="PUT">
+<button type="submit" class="btn btn-primary btn-lg"> 提交</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选课</title>
+    <link href="/static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+    <script src="/static/js/jquery-3.6.1.min.js" th:src="@{/js/jquery-3.6.1.min.js}"></script>
+    <script src="/static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+    <script src="/static/js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
+</head>
+<body>
+<form method="post" action="">
+<div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            课程列表
+        </div>
+        <div class="panel-body">
+            <div class="list-op" id="list_op">
+                <input type="submit" class="btn btn-primary" id="loginButton" value="提交选课"/>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th></th>
+        <th>课程编号</th>
+        <th>课程名</th>
+        <th>课程描述</th>
+        <th>授课教师</th>
+        <th>教师职称</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course,stat:${courselist}">
+        <td>
+            <div class="form-check">
+                <input type="checkbox" name="courseChoose" class="form-check-input" th:value="${course.courseID}" value="">
+            </div>
+        </td>
+        <td th:text="${course.courseID}">Tanmay</td>
+        <td th:text="${course.courseName}">Bangalore</td>
+        <td th:text="${course.courseComment}">Bangalore</td>
+        <td th:text="${course.teacherName}">560001</td>
+        <td th:text="${course.teacherTitle}">560001</td>
+    </tr>
+    </tbody>
+    </table>
+</form>
+</body>
+</html>
